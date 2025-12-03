@@ -212,6 +212,36 @@ public class CheckoutCart
         }
     }
 
+//3
+
+    public class User
+    {
+        public int Id{get;set;}
+        public string Name{get;set;}
+    }
+
+    public class UserRepository : IRepository<User>
+    {
+        List<User> users = new List<User>();
+        public void Add(User user)
+        {
+            users.Add(user);
+
+        }
+
+        public User Get(int id)
+        {
+            foreach (User user in users)
+            {
+                if (user.Id==id)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
+    }
+
 internal class Program
     {
         private static void Main(string[] args)
@@ -250,6 +280,23 @@ internal class Program
              Console.WriteLine($"box2={box2.get()}, box3={box3.get()}");
              
              //3
+             
+             UserRepository userRepository = new UserRepository();
+             User user = new User{Id=11,Name="farah essam"};
+             userRepository.Add(user);
+             int myId = 1;
+             //int myId = user.Id;
+             User getUser = userRepository.Get(myId);
+             // User getUser = userRepository.Get(user.Id);
+             if (getUser != null)
+             {
+                 Console.WriteLine($"getUser={getUser.Id}");
+             }
+             else
+             {
+                 Console.WriteLine("not found :(");
+             }
+
         }
     }
     

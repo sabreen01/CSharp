@@ -12,3 +12,4 @@
 /Users/mawi/RiderProjects/ConsoleApp1/ConsoleApp1/obj/Debug/net9.0/ConsoleApp1.pdb
 /Users/mawi/RiderProjects/ConsoleApp1/ConsoleApp1/obj/Debug/net9.0/ConsoleApp1.genruntimeconfig.cache
 /Users/mawi/RiderProjects/ConsoleApp1/ConsoleApp1/obj/Debug/net9.0/ref/ConsoleApp1.dll
+/Users/mawi/RiderProjects/ConsoleApp1/ConsoleApp1/obj/Debug/net9.0/ConsoleApp1.sourcelink.json
