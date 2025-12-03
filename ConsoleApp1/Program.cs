@@ -111,7 +111,7 @@
 //     }
 // }
 
-
+using ConsoleApp1;
 public class CreditCardPayment : IPaymentStrategy
 {
     public void Pay( decimal amount)
@@ -186,7 +186,7 @@ public class CheckoutCart
 //--------------generic----------
 //1
 
-    public class Box<T>
+    public class Box<T> 
     { 
         T _content;
 
@@ -207,6 +207,11 @@ public class CheckoutCart
             T temp = a;
             a = b;
             b = temp;
+        }
+
+        public static T MaxValu<T>( T a,  T b) where T : IComparable<T>
+        {
+            return a.CompareTo(b) > 0 ? a : b;
         }
     }
 
@@ -294,6 +299,16 @@ internal class Program
              {
                  Console.WriteLine("not found :(");
              }
+             
+             //4
+
+             int max = Utality.MaxValu(10,11);
+             Console.WriteLine($"max={max}");
+             string max2 = Utality.MaxValu("farah", "essam");
+             Console.WriteLine($"max2={max2}");
+             // Box<int> maxBox = Utality.MaxValu<Box<int>(ref box2,ref box3);
+          
+
 
         }
     }
