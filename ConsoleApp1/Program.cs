@@ -112,8 +112,6 @@
 // }
 
 
-using ConsoleApp1;
-
 public class CreditCardPayment : IPaymentStrategy
 {
     public void Pay( decimal amount)
