@@ -245,7 +245,97 @@ public class CheckoutCart
         }
     }
 
-internal class Program
+//delegates
+
+    public class Employee
+    {
+        public string Name{get;set;}
+        public int salary{get;set;}
+        public override string ToString()=>$"[Name:{Name},Salary:{salary}]";
+        public static List<Employee> GetEmployees()
+        {
+            return new List<Employee>
+            {
+                new Employee { Name = "farah", salary = 50000 },
+                new Employee { Name = "essam", salary = 20000 },
+                new Employee { Name = "ali", salary = 30000 },
+                new Employee { Name = "abdo", salary = 40000 }
+            };
+
+        }
+    }
+
+    public class Product
+    {
+        public string Name{get;set;}
+        public int Price{get;set;}
+        public override string ToString() => $"[Name:{Name} , Price:{Price}]";
+
+        public static List<Product> GetProducts()
+        {
+            return new List<Product>
+            {
+                new Product { Name = "coffee", Price = 1000 },
+                new Product { Name = "milk", Price = 2000 },
+                new Product { Name = "chocolate", Price = 3000},
+                new Product { Name = "shoes", Price = 40000 }
+
+            };
+        }
+    }
+
+    public class Report<T>
+    {
+        public void Process(List<Employee> employees, Func<Employee, bool> Condition)
+        {
+            foreach (Employee employee in employees)
+            {
+                if (Condition(employee))
+                {
+                   Console.WriteLine(employee); 
+                }
+            }
+            
+        }
+
+        public void GenericProcess(List<T> list, Func<T, bool> Condition)
+        {
+            foreach (T item in list)
+            {
+                if (Condition(item))
+                {
+                    Console.WriteLine(item);
+                }
+            }
+        }
+    }
+
+
+
+
+
+//نجرب حاجه تاني 
+//حاجه تاخد اكشن
+
+    public class Button
+    {
+        public Action onClick;
+        public void Click()
+        {
+
+            // if (onClick != null)
+            // {
+            //     onClick();
+            // }
+            onClick?.Invoke();
+        }
+    }
+    
+    
+    
+    
+    //-------------------------------
+      class Program
     {
         private static void Main(string[] args)
         {
@@ -307,7 +397,36 @@ internal class Program
              string max2 = Utality.MaxValu("farah", "essam");
              Console.WriteLine($"max2={max2}");
              // Box<int> maxBox = Utality.MaxValu<Box<int>(ref box2,ref box3);
-          
+             
+             
+             
+             
+             
+             //delegates
+            // var report = new Report();
+             var report = new Report<Employee>();
+             var emps=Employee.GetEmployees();
+             
+             report.Process(emps, e => e.salary >= 50000);
+            
+             //GenericProcess
+             var report2 = new Report<Product>();
+             var products = Product.GetProducts();
+             report2.GenericProcess(products, p => p.Price <= 1000);
+             
+             
+             
+             
+             
+             
+             //---------button---
+             
+             Button btn=new Button();
+             btn.onClick += () => Console.WriteLine("btn click");
+             btn.onClick += () => Console.WriteLine("playing sound");
+             btn.onClick += () => Console.WriteLine("exit");
+             btn.Click();
+             
 
 
         }
