@@ -310,10 +310,6 @@ public class CheckoutCart
         }
     }
 
-
-
-
-
 //نجرب حاجه تاني 
 //حاجه تاخد اكشن
 
@@ -330,6 +326,47 @@ public class CheckoutCart
             onClick?.Invoke();
         }
     }
+
+
+
+//Event
+
+
+//IEnumrable&IEnumerator
+
+    public class LogEntry
+    {
+        public string Message{get;set;}
+        public string Type{get;set;}
+        public override string ToString()=>$"[Message:{Message},Type:{Type}]";
+    }
+
+    public class ServerLogs
+    {
+        private List<LogEntry> logs = new List<LogEntry>
+        {
+            new LogEntry{Message="Hello",Type="warning"},
+            new LogEntry{Message="Helaa",Type="Critical"},
+            new LogEntry{Message="Help",Type="info"},
+            new LogEntry{Message="ay 7aga, world!",Type="Critical"},
+            new LogEntry{Message="ay 7aga",Type="Critical"},
+            new LogEntry{Message="Hellooo",Type="warning"},
+
+        };
+
+        public IEnumerable<LogEntry> GetCriticalLogs()
+        {
+            foreach (LogEntry log in logs)
+            {
+                if (log.Type == "Critical")
+                {
+                    yield return log;
+                }
+            }
+            
+        }
+    }
+
     
     
     
@@ -412,7 +449,7 @@ public class CheckoutCart
              //GenericProcess
              var report2 = new Report<Product>();
              var products = Product.GetProducts();
-             report2.GenericProcess(products, p => p.Price <= 1000);
+             report2.GenericProcess(products, p => p.Price > 1000);
              
              
              
@@ -427,7 +464,15 @@ public class CheckoutCart
              btn.onClick += () => Console.WriteLine("exit");
              btn.Click();
              
-
+             
+             //IEnum
+             ServerLogs server = new ServerLogs();
+             var criticalLogs=server.GetCriticalLogs();
+             foreach (var log in criticalLogs)
+             {
+                Console.WriteLine( log); 
+             }
+           
 
         }
     }
